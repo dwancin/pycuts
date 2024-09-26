@@ -9,7 +9,7 @@ def device() -> torch.device:
     Returns:
         torch.device: The current device.
     """
-    device = device or get_device()
+    device = device or device()
     return torch.device(
         "cuda" if torch.cuda.is_available() 
         else "mps" if torch.backends.mps.is_available()
@@ -23,7 +23,7 @@ def gpu() -> bool:
     Returns:
         bool: `True` if GPU is available, `False` if only CPU is available.
     """
-    device = get_device()
+    device = device()
     return True if ["mps", "cuda"] in device else False
 
 def empty_cache(device: Optional[torch.device] = None) -> None:
@@ -33,7 +33,7 @@ def empty_cache(device: Optional[torch.device] = None) -> None:
     Args:
         device (torch.device, optional): The device to empty cache for. Defaults to current device.
     """
-    device = device or get_device()
+    device = device or device()
     if device.type == "cuda":
         torch.cuda.empty_cache()
     elif device.type == "mps":
@@ -46,7 +46,7 @@ def synchronize(device: Optional[torch.device] = None) -> None:
     Args:
         device (torch.device, optional): The device to synchronize. Defaults to current device.
     """
-    device = device or get_device()
+    device = device or device()
     if device.type == "cuda":
         torch.cuda.synchronize()
     elif device.type == "mps":
@@ -59,7 +59,7 @@ def device_count() -> int:
     Returns:
         int: The number of devices available.
     """
-    device = get_device()
+    device = device()
     if device == "cuda":
         return torch.cuda.device_count()
     elif device == "mps":
@@ -83,7 +83,7 @@ def manual_seed(seed: int) -> None:
     except ImportError as e:
         raise ImportError(f"Required module not found: {e.name}. Please ensure it is installed.") from e
     
-    device = device or get_device()
+    device = device or device()
     
     random.seed(seed)
     np.random.seed(seed)
