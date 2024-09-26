@@ -1,18 +1,17 @@
-# pycuts/torch.py
+# https://raw.githubusercontent.com/dwancin/pycuts/main/pycuts/torch.py
 import torch
-from typing import Optional, Union
+from typing import Optional
 
 def device() -> torch.device:
     """
-    Returns the current device.
+    Returns the appropriate device (cuda, mps, or cpu).
     
     Returns:
-        torch.device: The current device.
+        torch.device: The best available device.
     """
-    device = device or device()
     return torch.device(
         "cuda" if torch.cuda.is_available() 
-        else "mps" if torch.backends.mps.is_available()
+        else "mps" if torch.backends.mps.is_available() 
         else "cpu"
     )
 
@@ -21,15 +20,14 @@ def gpu() -> bool:
     Checks whether a GPU is available or not.
     
     Returns:
-        bool: `True` if GPU is available, `False` if only CPU is available.
+        bool: `True` if a GPU is available, `False` if only CPU is available.
     """
-    device = device()
-    return True if ["mps", "cuda"] in device else False
+    current_device = device()
+    return current_device.type in ["mps", "cuda"]
 
 def empty_cache(device: Optional[torch.device] = None) -> None:
     """
     Clears the GPU memory to prevent out-of-memory errors.
-
     Args:
         device (torch.device, optional): The device to empty cache for. Defaults to current device.
     """
@@ -42,7 +40,6 @@ def empty_cache(device: Optional[torch.device] = None) -> None:
 def synchronize(device: Optional[torch.device] = None) -> None:
     """
     Waits for all kernels in all streams on the given device to complete.
-
     Args:
         device (torch.device, optional): The device to synchronize. Defaults to current device.
     """
@@ -55,15 +52,14 @@ def synchronize(device: Optional[torch.device] = None) -> None:
 def device_count() -> int:
     """
     Returns the number of available devices.
-
     Returns:
         int: The number of devices available.
     """
-    device = device()
-    if device == "cuda":
+    current_device = device()
+    if current_device.type == "cuda":
         return torch.cuda.device_count()
-    elif device == "mps":
-        return torch.mps.device_count()
+    elif current_device.type == "mps":
+        return 1  # Only one MPS device available on macOS
     else:
         return 1
 
@@ -83,13 +79,13 @@ def manual_seed(seed: int) -> None:
     except ImportError as e:
         raise ImportError(f"Required module not found: {e.name}. Please ensure it is installed.") from e
     
-    device = device or device()
+    current_device = device()
     
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
 
-    if device == "cuda":
+    if current_device.type == "cuda":
         torch.cuda.manual_seed_all(seed)
-    elif device == "mps":
+    elif current_device.type == "mps":
         torch.mps.manual_seed(seed)
