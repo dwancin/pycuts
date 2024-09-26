@@ -1,4 +1,4 @@
-# pycuts/huggingface.py
+# https://raw.githubusercontent.com/dwancin/pycuts/main/pycuts/huggingface_hub.py
 import os
 
 def is_spaces() -> bool:
