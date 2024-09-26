@@ -1,4 +1,4 @@
-**pycuts** is a Python library that provides a collection of shortcut functions for common operations across various libraries.
+**pycuts** is a small Python library that provides a collection of shortcut functions for common operations across various libraries.
 
 ## Installation
 
