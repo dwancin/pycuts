@@ -1,4 +1,4 @@
-# pycuts/__init__.py
+# https://raw.githubusercontent.com/dwancin/pycuts/main/pycuts/__init__.py
 from .torch import (
     device, gpu, empty_cache, synchronize, device_count, manual_seed
 )
