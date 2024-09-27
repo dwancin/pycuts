@@ -29,3 +29,10 @@ pip install pycuts
 | `manual_seed(seed)`   | `None`                | Sets the random seed for reproducible behavior across CPU/GPU.          |
 | `is_spaces()`         | `bool`                | Returns `True` if running in a Hugging Face Space, otherwise `False`.   |
 | `is_zero_gpu_space()` | `bool`                | Returns `True` if running in a zero-GPU Hugging Face Space.             |
+
+## Ecamples
+
+```python
+import pycuts
+print(f"current device is: {pycuts.device()}")
+```
