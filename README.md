@@ -1,3 +1,10 @@
+# `pycuts`
+<div style="display: flex; gap: 7px;">
+  <a href="https://pypi.org/project/pycuts/" target="_blank"><img alt="PyPI" src="https://img.shields.io/pypi/v/pycuts"></a>
+  <a href="https://huggingface.co/spaces/dwancin/" target="_blank"><img alt="Hugging Face" src="https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-%23097EFF?style=flat&logoColor=black"></a>
+  <a href="https://github.com/dwancin/pycuts" target="_blank"><img alt="Static Badge" src="https://img.shields.io/badge/Repository-white?logo=github&logoColor=black"></a>
+</div>
+
 **pycuts** is a small Python library that provides a collection of shortcut functions for common operations across various libraries.
 
 ## Installation
