@@ -8,7 +8,7 @@ def is_spaces() -> bool:
     Returns:
         bool: True if running on Hugging Face Space, False otherwise.
     """
-    return os.getenv("SPACE_ID") == "true"
+    return True if os.getenv("SPACE_ID") else False
 
 def is_zero_gpu_space() -> bool:
     """
@@ -17,4 +17,4 @@ def is_zero_gpu_space() -> bool:
     Returns:
         bool: True if running Zero GPU, False otherwise.
     """
-    return os.getenv("SPACES_ZERO_GPU") == "true"
+    return True if os.getenv("SPACES_ZERO_GPU") else False
