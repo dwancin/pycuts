@@ -30,7 +30,7 @@ pip install pycuts
 | `is_spaces()`         | `bool`                | Returns `True` if running in a Hugging Face Space, otherwise `False`.   |
 | `is_zero_gpu_space()` | `bool`                | Returns `True` if running in a zero-GPU Hugging Face Space.             |
 
-## Ecamples
+## Examples
 
 ```python
 import pycuts
